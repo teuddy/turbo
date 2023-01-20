@@ -444,7 +444,7 @@ pub async fn start_server(options: &DevServerOptions) -> Result<()> {
 
     {
         let index_uri = ServerAddr::new(server.addr).to_string()?;
-        println!(
+        eprintln!(
             "{} - started server on {}:{}, url: {}",
             "ready".green(),
             server.addr.ip(),
@@ -458,14 +458,14 @@ pub async fn start_server(options: &DevServerOptions) -> Result<()> {
 
     let stats_future = async move {
         if options.log_detail {
-            println!(
+            eprintln!(
                 "{event_type} - initial compilation {start} ({memory})",
                 event_type = "event".purple(),
                 start = FormatDuration(start.elapsed()),
                 memory = FormatBytes(TurboMalloc::memory_usage())
             );
         } else {
-            println!(
+            eprintln!(
                 "{event_type} - initial compilation {start}",
                 event_type = "event".purple(),
                 start = FormatDuration(start.elapsed()),
@@ -482,7 +482,7 @@ pub async fn start_server(options: &DevServerOptions) -> Result<()> {
             if let Some((elapsed, count)) = update_future.await {
                 progress_counter = 0;
                 if options.log_detail {
-                    println!(
+                    eprintln!(
                         "\x1b[2K{event_type} - updated in {elapsed} ({tasks} tasks, {memory})",
                         event_type = "event".purple(),
                         elapsed = FormatDuration(elapsed),
@@ -490,7 +490,7 @@ pub async fn start_server(options: &DevServerOptions) -> Result<()> {
                         memory = FormatBytes(TurboMalloc::memory_usage())
                     );
                 } else {
-                    println!(
+                    eprintln!(
                         "\x1b[2K{event_type} - updated in {elapsed}",
                         event_type = "event".purple(),
                         elapsed = FormatDuration(elapsed),
@@ -499,13 +499,13 @@ pub async fn start_server(options: &DevServerOptions) -> Result<()> {
             } else {
                 progress_counter += 1;
                 if options.log_detail {
-                    print!(
+                    eprint!(
                         "\x1b[2K{event_type} - updating for {progress_counter}s... ({memory})\r",
                         event_type = "event".purple(),
                         memory = FormatBytes(TurboMalloc::memory_usage())
                     );
                 } else {
-                    print!(
+                    eprint!(
                         "\x1b[2K{event_type} - updating for {progress_counter}s...\r",
                         event_type = "event".purple(),
                     );
