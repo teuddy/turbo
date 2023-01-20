@@ -423,7 +423,7 @@ pub async fn start_server(options: &DevServerOptions) -> Result<()> {
 
     #[allow(unused_mut)]
     let mut server = NextDevServerBuilder::new(tt, dir, root_dir)
-        .entry_request(EntryRequest::Relative("src/index".into()))
+        .entry_request(EntryRequest::Relative("index".into()))
         .eager_compile(options.eager_compile)
         .hostname(options.hostname)
         .port(options.port)

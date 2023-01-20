@@ -207,6 +207,7 @@ impl GetContentSourceContent for NodeRenderGetContentResult {
             this.fallback_page,
             entry.chunking_context,
             entry.intermediate_output_path,
+            entry.output_root,
             RenderData {
                 params,
                 method: method.clone(),
