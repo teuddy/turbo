@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/vercel/turbo/issues"
   },
-  "bin": "dist/index.js",
+  "bin": "dist/cli.js",
   "scripts": {
     "build": "tsup",
     "test": "jest",
