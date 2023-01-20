@@ -3567,6 +3567,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap 4.0.29",
+ "mime",
  "next-core",
  "owo-colors",
  "serde",
@@ -3580,6 +3581,7 @@ dependencies = [
  "turbopack-core",
  "turbopack-dev-server",
  "turbopack-node",
+ "vergen",
 ]
 
 [[package]]
@@ -3623,7 +3625,7 @@ dependencies = [
  "httpmock",
  "lazy_static",
  "mime",
- "next-core",
+ "next-build",
  "nix",
  "once_cell",
  "owo-colors",
@@ -3647,7 +3649,6 @@ dependencies = [
  "turbopack-core",
  "turbopack-create-test-app",
  "turbopack-dev-server",
- "turbopack-node",
  "url",
  "vergen",
  "webbrowser",

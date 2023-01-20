@@ -6,9 +6,15 @@ license = "MPL-2.0"
 edition = "2021"
 autobenches = false
 
+[features]
+next-font-local = ["next-core/next-font-local"]
+native-tls = ["next-core/native-tls"]
+rustls-tls = ["next-core/rustls-tls"]
+
 [dependencies]
 anyhow = "1.0.47"
 clap = { version = "4.0.18", features = ["derive", "env"], optional = true }
+mime = "0.3.16"
 next-core = { path = "../next-core" }
 owo-colors = "3"
 serde = "1.0.136"
@@ -24,3 +30,7 @@ turbopack-node = { path = "../turbopack-node" }
 
 [build-dependencies]
 turbo-tasks-build = { path = "../turbo-tasks-build" }
+vergen = { version = "7.3.2", default-features = false, features = [
+  "cargo",
+  "build",
+] }

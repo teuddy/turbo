@@ -34,9 +34,9 @@ tokio_console = [
 ]
 profile = []
 custom_allocator = ["turbo-malloc/custom_allocator"]
-next-font-local = ["next-core/next-font-local"]
-native-tls = ["next-core/native-tls"]
-rustls-tls = ["next-core/rustls-tls"]
+next-font-local = ["next-build/next-font-local"]
+native-tls = ["next-build/native-tls"]
+rustls-tls = ["next-build/rustls-tls"]
 
 [dependencies]
 anyhow = "1.0.47"
@@ -44,7 +44,7 @@ clap = { version = "4.0.18", features = ["derive", "env"], optional = true }
 console-subscriber = { version = "0.1.8", optional = true }
 futures = "0.3.25"
 mime = "0.3.16"
-next-core = { path = "../next-core" }
+next-build = { path = "../next-build" }
 owo-colors = "3"
 serde = "1.0.136"
 tokio = { version = "1.21.2", features = ["full"] }
@@ -55,7 +55,6 @@ turbo-tasks-memory = { path = "../turbo-tasks-memory" }
 turbopack-cli-utils = { path = "../turbopack-cli-utils" }
 turbopack-core = { path = "../turbopack-core" }
 turbopack-dev-server = { path = "../turbopack-dev-server" }
-turbopack-node = { path = "../turbopack-node" }
 webbrowser = "0.7.1"
 
 [dev-dependencies]

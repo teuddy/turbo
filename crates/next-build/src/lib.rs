@@ -1,3 +1,7 @@
+#![feature(min_specialization)]
+
+mod turbo_tasks_viz;
+
 use std::{
     collections::HashSet, env::current_dir, net::SocketAddr, path::MAIN_SEPARATOR, sync::Arc,
 };
@@ -62,7 +66,7 @@ impl NextBuildBuilder {
         }
     }
 
-    pub async fn build(self) -> Result<()> {
+    pub async fn source(self) -> ContentSourceVc {
         let log_options = LogOptions {
             current_dir: current_dir().unwrap(),
             show_all: self.show_all,
@@ -79,8 +83,7 @@ impl NextBuildBuilder {
             console_ui.into(),
             self.browserslist_query,
             Arc::new(self.server_addr).into(),
-        );
-        Ok(())
+        )
     }
 }
 
@@ -92,7 +95,7 @@ pub enum EntryRequest {
 
 #[allow(clippy::too_many_arguments)]
 #[turbo_tasks::function]
-async fn source(
+pub async fn source(
     root_dir: String,
     project_dir: String,
     entry_requests: TransientInstance<Vec<EntryRequest>>,
@@ -190,9 +193,15 @@ async fn source(
         CombinedContentSourceVc::new(vec![static_source, page_source]).into(),
     )
     .into();
+    let viz = turbo_tasks_viz::TurboTasksSource {
+        turbo_tasks: turbo_tasks.into(),
+    }
+    .cell()
+    .into();
     let source = RouterContentSource {
         routes: vec![
             ("__turbopack__/".to_string(), introspect),
+            ("__turbo_tasks__/".to_string(), viz),
             (
                 "__nextjs_original-stack-frame".to_string(),
                 source_map_trace,
